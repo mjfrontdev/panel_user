@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل کاربری - ورود و ثبت‌نام</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" data-aos="fade-right">
+                <i class="bi bi-shield-check text-primary me-2"></i>
+                پنل کاربری
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg-animation">
+            <canvas id="heroCanvas"></canvas>
+        </div>
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="hero-title">
+                        <span class="text-primary">پنل کاربری</span> پیشرفته
+                    </h1>
+                    <p class="hero-subtitle">
+                        سیستم مدیریت کاربران با قابلیت‌های پیشرفته و رابط کاربری مدرن
+                    </p>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="auth-boxes-container">
+                        <!-- Admin Box -->
+                        <div class="auth-box admin-box" data-aos="fade-up" data-aos-delay="100">
+                            <div class="auth-box-header">
+                                <div class="auth-box-icon">
+                                    <i class="fas fa-user-shield"></i>
+                                </div>
+                                <h3>پنل ادمین</h3>
+                                <p>دسترسی کامل به سیستم مدیریت</p>
+                            </div>
+                            <div class="auth-box-buttons">
+                                <button class="btn btn-primary w-100 mb-3" onclick="showAdminLoginModal()">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                                    ورود ادمین
+                                </button>
+                                <button class="btn btn-outline-primary w-100" onclick="showAdminRegisterModal()">
+                                    <i class="bi bi-person-plus me-2"></i>
+                                    ثبت‌نام ادمین
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- User Box -->
+                        <div class="auth-box user-box" data-aos="fade-up" data-aos-delay="200">
+                            <div class="auth-box-header">
+                                <div class="auth-box-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h3>پنل کاربر</h3>
+                                <p>دسترسی به امکانات کاربری</p>
+                            </div>
+                            <div class="auth-box-buttons">
+                                <button class="btn btn-secondary w-100 mb-3" onclick="showUserLoginModal()">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                                    ورود کاربر
+                                </button>
+                                <button class="btn btn-outline-secondary w-100" onclick="showUserRegisterModal()">
+                                    <i class="bi bi-person-plus me-2"></i>
+                                    ثبت‌نام کاربر
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-muted mb-0">
+                        تموم حقوق برای تیم desvio محفوظ است
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div class="modal fade" id="adminLoginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content enhanced-modal">
+                <div class="modal-header">
+                    <div class="modal-header-content">
+                        <div class="modal-icon admin-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="modal-title-section">
+                            <h5 class="modal-title">ورود ادمین</h5>
+                            <p class="modal-subtitle">دسترسی کامل به سیستم مدیریت</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminLoginForm" class="enhanced-form">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-person me-2"></i>
+                                نام کاربری
+                            </label>
+                            <input type="text" class="form-control enhanced-input" id="adminLoginUsername" required>
+                            <div class="invalid-feedback">لطفاً نام کاربری را وارد کنید</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-lock me-2"></i>
+                                رمز عبور
+                            </label>
+                            <div class="password-input-group">
+                                <input type="password" class="form-control enhanced-input" id="adminLoginPassword" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('adminLoginPassword')">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <div class="invalid-feedback">لطفاً رمز عبور را وارد کنید</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 enhanced-btn">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            <span class="btn-text">ورود</span>
+                            <div class="btn-loader" style="display: none;">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Register Modal -->
+    <div class="modal fade" id="adminRegisterModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content enhanced-modal">
+                <div class="modal-header">
+                    <div class="modal-header-content">
+                        <div class="modal-icon admin-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="modal-title-section">
+                            <h5 class="modal-title">ثبت‌نام ادمین</h5>
+                            <p class="modal-subtitle">ایجاد حساب ادمین جدید</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminRegisterForm" class="enhanced-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="bi bi-person-badge me-2"></i>
+                                    نام کامل
+                                </label>
+                                <input type="text" class="form-control enhanced-input" id="adminRegisterFullName" required>
+                                <div class="invalid-feedback">لطفاً نام کامل را وارد کنید</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="bi bi-person me-2"></i>
+                                    نام کاربری
+                                </label>
+                                <input type="text" class="form-control enhanced-input" id="adminRegisterUsername" required>
+                                <div class="invalid-feedback">لطفاً نام کاربری را وارد کنید</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-envelope me-2"></i>
+                                ایمیل
+                            </label>
+                            <input type="email" class="form-control enhanced-input" id="adminRegisterEmail" required>
+                            <div class="invalid-feedback">لطفاً ایمیل معتبر وارد کنید</div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="bi bi-lock me-2"></i>
+                                    رمز عبور
+                                </label>
+                                <div class="password-input-group">
+                                    <input type="password" class="form-control enhanced-input" id="adminRegisterPassword" required>
+                                    <button type="button" class="password-toggle" onclick="togglePassword('adminRegisterPassword')">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength" id="adminPasswordStrength"></div>
+                                <div class="invalid-feedback">رمز عبور باید حداقل 8 کاراکتر باشد</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="bi bi-lock-fill me-2"></i>
+                                    تکرار رمز عبور
+                                </label>
+                                <div class="password-input-group">
+                                    <input type="password" class="form-control enhanced-input" id="adminRegisterConfirmPassword" required>
+                                    <button type="button" class="password-toggle" onclick="togglePassword('adminRegisterConfirmPassword')">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="invalid-feedback">رمز عبور و تکرار آن مطابقت ندارند</div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 enhanced-btn">
+                            <i class="bi bi-person-plus me-2"></i>
+                            <span class="btn-text">ثبت‌نام</span>
+                            <div class="btn-loader" style="display: none;">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Login Modal -->
+    <div class="modal fade" id="userLoginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content enhanced-modal">
+                <div class="modal-header">
+                    <div class="modal-header-content">
+                        <div class="modal-icon user-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="modal-title-section">
+                            <h5 class="modal-title">ورود کاربر</h5>
+                            <p class="modal-subtitle">دسترسی به امکانات کاربری</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="userLoginForm" class="enhanced-form">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-person me-2"></i>
+                                نام کاربری
+                            </label>
+                            <input type="text" class="form-control enhanced-input" id="userLoginUsername" required>
+                            <div class="invalid-feedback">لطفاً نام کاربری را وارد کنید</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-lock me-2"></i>
+                                رمز عبور
+                            </label>
+                            <div class="password-input-group">
+                                <input type="password" class="form-control enhanced-input" id="userLoginPassword" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('userLoginPassword')">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <div class="invalid-feedback">لطفاً رمز عبور را وارد کنید</div>
+                        </div>
+                        <button type="submit" class="btn btn-secondary w-100 enhanced-btn">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            <span class="btn-text">ورود</span>
+                            <div class="btn-loader" style="display: none;">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Register Modal -->
+    <div class="modal fade" id="userRegisterModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content enhanced-modal">
+                <div class="modal-header">
+                    <div class="modal-header-content">
+                        <div class="modal-icon user-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="modal-title-section">
+                            <h5 class="modal-title">ثبت‌نام کاربر</h5>
+                            <p class="modal-subtitle">ایجاد حساب کاربری جدید</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="userRegisterForm" class="enhanced-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="bi bi-person-badge me-2"></i>
+                                    نام کامل
+                                </label>
+                                <input type="text" class="form-control enhanced-input" id="userRegisterFullName" required>
+                                <div class="invalid-feedback">لطفاً نام کامل را وارد کنید</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="bi bi-person me-2"></i>
+                                    نام کاربری
+                                </label>
+                                <input type="text" class="form-control enhanced-input" id="userRegisterUsername" required>
+                                <div class="invalid-feedback">لطفاً نام کاربری را وارد کنید</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-envelope me-2"></i>
+                                ایمیل
+                            </label>
+                            <input type="email" class="form-control enhanced-input" id="userRegisterEmail" required>
+                            <div class="invalid-feedback">لطفاً ایمیل معتبر وارد کنید</div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="bi bi-lock me-2"></i>
+                                    رمز عبور
+                                </label>
+                                <div class="password-input-group">
+                                    <input type="password" class="form-control enhanced-input" id="userRegisterPassword" required>
+                                    <button type="button" class="password-toggle" onclick="togglePassword('userRegisterPassword')">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength" id="userPasswordStrength"></div>
+                                <div class="invalid-feedback">رمز عبور باید حداقل 8 کاراکتر باشد</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="bi bi-lock-fill me-2"></i>
+                                    تکرار رمز عبور
+                                </label>
+                                <div class="password-input-group">
+                                    <input type="password" class="form-control enhanced-input" id="userRegisterConfirmPassword" required>
+                                    <button type="button" class="password-toggle" onclick="togglePassword('userRegisterConfirmPassword')">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="invalid-feedback">رمز عبور و تکرار آن مطابقت ندارند</div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-secondary w-100 enhanced-btn">
+                            <i class="bi bi-person-plus me-2"></i>
+                            <span class="btn-text">ثبت‌نام</span>
+                            <div class="btn-loader" style="display: none;">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

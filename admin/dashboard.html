@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد ادمین | FlexiJSON</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/admin.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dark-theme admin-dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="bi bi-cpu text-primary"></i>
+                <span>FlexiJSON</span>
+            </div>
+            <button class="btn-close btn-close-white d-lg-none" onclick="toggleSidebar()"></button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item active">
+                    <a href="#dashboard" class="nav-link" onclick="showSection('dashboard')">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>داشبورد</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#users" class="nav-link" onclick="showSection('users')">
+                        <i class="bi bi-people"></i>
+                        <span>مدیریت کاربران</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#analytics" class="nav-link" onclick="showSection('analytics')">
+                        <i class="bi bi-graph-up"></i>
+                        <span>تحلیل‌ها</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#settings" class="nav-link" onclick="showSection('settings')">
+                        <i class="bi bi-gear"></i>
+                        <span>تنظیمات</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#reports" class="nav-link" onclick="showSection('reports')">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <span>گزارشات</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#logs" class="nav-link" onclick="showSection('logs')">
+                        <i class="bi bi-journal-text"></i>
+                        <span>لاگ‌ها</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <img src="https://via.placeholder.com/40" alt="User" class="user-avatar">
+                <div class="user-details">
+                    <span class="user-name">ادمین</span>
+                    <span class="user-role">مدیر سیستم</span>
+                </div>
+            </div>
+            <button class="btn btn-outline-danger btn-sm" onclick="logout()">
+                <i class="bi bi-box-arrow-right"></i>
+                خروج
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <div class="nav-left">
+                <button class="btn btn-link d-lg-none" onclick="toggleSidebar()">
+                    <i class="bi bi-list fs-4"></i>
+                </button>
+                <h4 class="page-title mb-0">داشبورد</h4>
+            </div>
+            
+            <div class="nav-right">
+                <div class="search-box">
+                    <input type="text" placeholder="جستجو..." class="form-control">
+                    <i class="bi bi-search"></i>
+                </div>
+                
+                <div class="notifications">
+                    <button class="btn btn-link position-relative">
+                        <i class="bi bi-bell fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </button>
+                </div>
+                
+                <div class="user-menu">
+                    <button class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <img src="https://via.placeholder.com/32" alt="User" class="user-avatar-sm">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#profile">پروفایل</a></li>
+                        <li><a class="dropdown-item" href="#settings">تنظیمات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" onclick="logout()">خروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="content-section active">
+                <div class="row g-4">
+                    <!-- Stats Cards -->
+                    <div class="col-xl-3 col-md-6" data-aos="fade-up">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number">1,234</h3>
+                                <p class="stat-label">کاربران فعال</p>
+                                <span class="stat-change positive">+12%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number">89.5%</h3>
+                                <p class="stat-label">نرخ موفقیت</p>
+                                <span class="stat-change positive">+5.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number">2.3s</h3>
+                                <p class="stat-label">زمان پاسخ</p>
+                                <span class="stat-change negative">-0.5s</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-danger">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number">99.9%</h3>
+                                <p class="stat-label">امنیت سیستم</p>
+                                <span class="stat-change positive">+0.1%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mt-4">
+                    <!-- Chart -->
+                    <div class="col-xl-8" data-aos="fade-up">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">آمار کاربران</h5>
+                                <div class="card-actions">
+                                    <button class="btn btn-sm btn-outline-primary">دانلود</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="userChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activity -->
+                    <div class="col-xl-4" data-aos="fade-up">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">فعالیت‌های اخیر</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-primary">
+                                            <i class="bi bi-person-plus"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>کاربر جدید ثبت نام کرد</p>
+                                            <small>2 دقیقه پیش</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-success">
+                                            <i class="bi bi-check-circle"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>سیستم به‌روزرسانی شد</p>
+                                            <small>15 دقیقه پیش</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-warning">
+                                            <i class="bi bi-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>هشدار امنیتی</p>
+                                            <small>1 ساعت پیش</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Section -->
+            <div id="users" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">مدیریت کاربران</h5>
+                        <button class="btn btn-primary" onclick="showAddUserModal()">
+                            <i class="bi bi-person-plus"></i>
+                            افزودن کاربر
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>نام کاربری</th>
+                                        <th>ایمیل</th>
+                                        <th>نوع کاربر</th>
+                                        <th>وضعیت</th>
+                                        <th>تاریخ عضویت</th>
+                                        <th>عملیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>admin</td>
+                                        <td>admin@flexijson.com</td>
+                                        <td><span class="badge bg-primary">ادمین</span></td>
+                                        <td><span class="badge bg-success">فعال</span></td>
+                                        <td>1403/01/01</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">ویرایش</button>
+                                            <button class="btn btn-sm btn-outline-danger">حذف</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>user1</td>
+                                        <td>user1@example.com</td>
+                                        <td><span class="badge bg-secondary">کاربر</span></td>
+                                        <td><span class="badge bg-success">فعال</span></td>
+                                        <td>1403/01/15</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">ویرایش</button>
+                                            <button class="btn btn-sm btn-outline-danger">حذف</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div id="analytics" class="content-section">
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">تحلیل‌های پیشرفته</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="analyticsChart" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings" class="content-section">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">تنظیمات عمومی</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label class="form-label">نام سیستم</label>
+                                        <input type="text" class="form-control dark-input" value="FlexiJSON Panel">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">زبان پیش‌فرض</label>
+                                        <select class="form-select dark-input">
+                                            <option>فارسی</option>
+                                            <option>English</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">منطقه زمانی</label>
+                                        <select class="form-select dark-input">
+                                            <option>Asia/Tehran</option>
+                                            <option>UTC</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">ذخیره تنظیمات</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">تنظیمات امنیتی</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label class="form-label">رمز عبور فعلی</label>
+                                        <input type="password" class="form-control dark-input">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">رمز عبور جدید</label>
+                                        <input type="password" class="form-control dark-input">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">تکرار رمز عبور</label>
+                                        <input type="password" class="form-control dark-input">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">تغییر رمز عبور</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">گزارشات سیستم</h5>
+                        <div class="card-actions">
+                            <button class="btn btn-outline-primary">ایجاد گزارش</button>
+                            <button class="btn btn-outline-success">دانلود همه</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="report-card">
+                                    <i class="bi bi-file-earmark-text text-primary"></i>
+                                    <h6>گزارش کاربران</h6>
+                                    <p>آمار کامل کاربران سیستم</p>
+                                    <button class="btn btn-sm btn-primary">دانلود</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="report-card">
+                                    <i class="bi bi-graph-up text-success"></i>
+                                    <h6>گزارش عملکرد</h6>
+                                    <p>تحلیل عملکرد سیستم</p>
+                                    <button class="btn btn-sm btn-primary">دانلود</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="report-card">
+                                    <i class="bi bi-shield-check text-warning"></i>
+                                    <h6>گزارش امنیت</h6>
+                                    <p>وضعیت امنیتی سیستم</p>
+                                    <button class="btn btn-sm btn-primary">دانلود</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs Section -->
+            <div id="logs" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">لاگ‌های سیستم</h5>
+                        <div class="card-actions">
+                            <button class="btn btn-outline-danger">پاک کردن</button>
+                            <button class="btn btn-outline-primary">فیلتر</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="log-filters mb-3">
+                            <select class="form-select dark-input d-inline-block w-auto me-2">
+                                <option>همه سطوح</option>
+                                <option>خطا</option>
+                                <option>هشدار</option>
+                                <option>اطلاعات</option>
+                            </select>
+                            <input type="date" class="form-control dark-input d-inline-block w-auto me-2">
+                            <button class="btn btn-primary">اعمال فیلتر</button>
+                        </div>
+                        
+                        <div class="log-container">
+                            <div class="log-entry log-error">
+                                <span class="log-time">14:30:25</span>
+                                <span class="log-level">ERROR</span>
+                                <span class="log-message">خطا در اتصال به پایگاه داده</span>
+                            </div>
+                            <div class="log-entry log-warning">
+                                <span class="log-time">14:25:10</span>
+                                <span class="log-level">WARNING</span>
+                                <span class="log-message">فضای دیسک کم است</span>
+                            </div>
+                            <div class="log-entry log-info">
+                                <span class="log-time">14:20:00</span>
+                                <span class="log-level">INFO</span>
+                                <span class="log-message">سیستم راه‌اندازی شد</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/js/admin.js"></script>
+</body>
+</html>
